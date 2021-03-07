@@ -1,0 +1,36 @@
+### features
+variable "enabled" {
+  description = "A conditional indicator to create resources"
+  default     = true
+}
+
+### target roles
+variable "target_roles" {
+  description = "A list of full arn of iam roles to allow assuming"
+  default     = []
+}
+
+### policy
+variable "policies" {
+  description = "The list of full IAM policy ARNs to attach this role"
+  default     = []
+}
+
+### organization
+variable "namespace" {
+  description = "Namespace to organizae the IAM user"
+  default     = null
+}
+
+### description
+variable "name" {
+  description = "The logical name of user"
+  default     = null
+}
+
+### tags
+variable "tags" {
+  description = "The key-value maps for tagging"
+  type        = map(string)
+  default     = {}
+}
