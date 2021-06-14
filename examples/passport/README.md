@@ -14,8 +14,8 @@ terraform apply -target module.badge
 ```
 Also you can use the `-var-file` option for customized paramters when you run the terraform plan/apply command.
 ```
-terraform plan -var-file default.tfvars
-terraform apply -var-file default.tfvars
+terraform plan -var-file -target module.badge tc1.tfvars
+terraform apply -var-file -target module.badge tc1.tfvars
 ```
 
 ### Create a bespoke account
@@ -25,6 +25,11 @@ terraform init
 terraform apply -target module.analytics
 ```
 After all, you will see the generated IAM roles on the `bespoke` accounts.
+If you have customized your variables using the `-var-files` option in the previous step, you must use the same parameters in this step as well.
+```
+terraform plan -var-file -target module.analytics tc1.tfvars
+terraform apply -var-file -target module.analytics tc1.tfvars
+```
 
 ### Create IAM users
 Run terraform:
@@ -41,5 +46,5 @@ $ terraform destroy
 ```
 Don't forget you have to use the `-var-file` option when you run terraform destroy command to delete the aws resources created with extra variable files.
 ```
-$ terraform destroy -var-file default.tfvars
+$ terraform destroy -var-file tc1.tfvars
 ```
