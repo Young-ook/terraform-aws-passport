@@ -16,7 +16,7 @@ First, we have to build a badge account for baseline of identity gateway.
 Run terraform:
 ```
 terraform init
-terraform apply -target module.badge -var-file tc1.tfvars
+terraform apply -target module.badge
 ```
 Also you can use the `-var-file` option for customized paramters when you run the terraform plan/apply command.
 ```
@@ -28,9 +28,17 @@ terraform apply -var-file default.tfvars
 Run terraform:
 ```
 terraform init
-terraform apply -target module.bespoke -var-file tc1.tfvars
+terraform apply -target module.analytics
 ```
-After all, user will see the generated IAM roles.
+After all, you will see the generated IAM roles on the `bespoke` accounts.
+
+### Create IAM users
+Run terraform:
+```
+terraform init
+terraform apply
+```
+This command will create users and groups on the `badge` account with group and role mappings. After applying this, individual users will have access to their IAM user in the `badge` account for cross-account role switching.
 
 ## Clean up
 Run terraform:
