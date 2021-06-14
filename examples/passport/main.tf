@@ -20,22 +20,6 @@ module "badge" {
   namespace   = var.namespace
 }
 
-### bespoke account guardrails
-provider "aws" {
-  alias               = "bespoke"
-  region              = var.aws_region
-  allowed_account_ids = [var.aws_account]
-}
-
-module "bespoke" {
-  providers   = { aws = aws.badge }
-  source      = "./modules/bespoke"
-  name        = var.name
-  tags        = var.tags
-  aws_account = var.aws_account
-  namespace   = var.namespace
-}
-
 ### groups in id-gateway account
 ###
 ### Here is the example to show how to allow the (read-only) users in the data-scientist group
@@ -47,13 +31,13 @@ locals {
       name         = "data-scientist"
       namespace    = var.namespace
       tags         = var.tags
-      target_roles = [module.bespoke.roles["data-scientist"].role.arn]
+      target_roles = [module.analytics.roles["data-scientist"].role.arn]
     },
     {
       name         = "rescue"
       namespace    = var.namespace
       tags         = var.tags
-      target_roles = [module.bespoke.roles["rescue"].role.arn]
+      target_roles = [module.analytics.roles["rescue"].role.arn]
     }
   ]
 }
@@ -61,7 +45,7 @@ locals {
 module "group" {
   for_each     = { for group in local.groups : group.name => group }
   providers    = { aws = aws.badge }
-  depends_on   = [module.badge, module.bespoke]
+  depends_on   = [module.badge, module.analytics]
   source       = "../../modules/iam-group"
   name         = lookup(each.value, "name")
   namespace    = lookup(each.value, "namespace")
@@ -109,7 +93,7 @@ locals {
 module "user" {
   for_each   = { for user in local.users : user.name => user }
   providers  = { aws = aws.badge }
-  depends_on = [module.badge, module.bespoke]
+  depends_on = [module.badge, module.analytics]
   source     = "../../modules/iam-user"
   name       = lookup(each.value, "name")
   namespace  = lookup(each.value, "namespace")
