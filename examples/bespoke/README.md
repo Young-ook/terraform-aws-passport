@@ -1,8 +1,11 @@
 # Passport
 Passport is a terraform module for Cross-Account Identity and Access Management on AWS. For more details, please visit the [Passport](https://github.com/Young-ook/terraform-aws-passport) project page.
 
-## Bespoke account
-Badge AWS account is an identity gateway in a passport architecture where all user-role mappings accross accounts are managed. 
+## Bespoke account(s)
+Bespoke AWS account is an account that we create for a specific purpose whthin the passport architecture. Bespoke allows users of the badge account, identity gateway, to assume into roles in bespoke account, such as adminstrator, data scientist, developer. Those roles in bespoke account can only be access by badge account users.
+
+## Badge account
+Badge AWS account is an identity gateway in a passport architecture where all user-role mappings accross accounts are managed.
 
 ## Download example
 Download this example on your workspace
@@ -42,7 +45,7 @@ terraform apply
 This module creates users and groups in the `badge` account with group and role mappings. And also, it creates roles in the `bespoke` account for cross-role switching. However, in this example, we are using the same aws account for simple testing.
 
 ## Verify
-This example creates two users in your badge account. The name of one user is `security-officer` who can switch a security administrator role that it can manage all user-role mappings in the badge account. The other one is `developer`. This user can not switch to an internal or cross-account role.
+This example creates a user in your badge account. The name of user is `developer` who can switch to a rescue or a developer in the bespoke account.
 
 Don't forget after the first login your IAM user, you must enable MFA (Multi-Factor Authenticator) in your account before you switch a role.
 
