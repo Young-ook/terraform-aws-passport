@@ -1,20 +1,27 @@
 # output variables
 
 locals {
-  predefined_groups = zipmap(
-    ["badge", "security", "audit"],
+  baseline_groups = zipmap(
+    ["audit", "badge", "security"],
     [
+      module.audit-group.group,
       module.badge-group.group,
       module.security-group.group,
-      module.audit-group.group,
+    ]
+  )
+  baseline_roles = zipmap(
+    ["audit", "security"],
+    [
+      module.role["audit"],
+      module.role["security"],
     ]
   )
 }
 
-output "account" {
-  description = "The attributes of passport badge account"
+output "baseline" {
+  description = "The baseline of passport badge account"
   value = {
-    predefined_groups = local.predefined_groups,
-    predefined_roles  = module.role,
+    groups = local.baseline_groups,
+    roles  = local.baseline_roles,
   }
 }
