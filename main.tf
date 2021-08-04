@@ -4,7 +4,7 @@ module "badge-group" {
   name      = "badge"
   namespace = var.namespace
   tags      = var.tags
-  policies = [
+  policy_arns = [
     aws_iam_policy.force-mfa.arn,
     aws_iam_policy.creds-self.arn,
   ]

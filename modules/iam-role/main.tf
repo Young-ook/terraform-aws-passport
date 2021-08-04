@@ -26,7 +26,7 @@ resource "aws_iam_role" "role" {
 
 # security/policy
 resource "aws_iam_role_policy_attachment" "policy" {
-  for_each   = { for key, val in var.policies : key => val if var.enabled }
+  for_each   = { for key, val in var.policy_arns : key => val if var.enabled }
   policy_arn = each.value
   role       = aws_iam_role.role.0.name
 }
