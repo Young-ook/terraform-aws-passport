@@ -11,8 +11,8 @@ variable "target_roles" {
 }
 
 ### policy
-variable "policies" {
-  description = "The list of full IAM policy ARNs to attach this role"
+variable "policy_arns" {
+  description = "The list of full IAM policy ARNs to attach"
   default     = []
 }
 

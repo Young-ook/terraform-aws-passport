@@ -11,7 +11,7 @@ variable "features" {
 
 ### policy
 variable "policy_arns" {
-  description = "The list of the IAM policy ARNs for the user"
+  description = "The list of the IAM policy ARNs to attach"
   default     = []
 }
 

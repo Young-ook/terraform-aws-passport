@@ -9,7 +9,7 @@ module "badge" {
   source    = "Young-ook/passport/aws//modules/iam-group"
   name      = "badge"
   tags      = { desc = "Badge for all"}
-  policies = [
+  policy_arns = [
     aws_iam_policy.force-mfa.arn,
     aws_iam_policy.creds-self.arn,
   ]
