@@ -6,10 +6,11 @@ This is simple example of iam-role submodule of passport project.
 
 ```hcl
 module "infra-engineer" {
-  source     = "Young-ook/passport/aws//modules/iam-role"
-  name       = "infra-engineer"
-  tags       = { desc = "Infrastructure Engineering Team"}
-  policies   = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  source           = "Young-ook/passport/aws//modules/iam-role"
+  name             = "infra-engineer"
+  tags             = { desc = "Infrastructure Engineering Team"}
+  session_duration = "7200"
+  policy_arns      = ["arn:aws:iam::aws:policy/AdministratorAccess"]
   principals = {
     "aws" = ["111122223333", "222233334444"]
   }
