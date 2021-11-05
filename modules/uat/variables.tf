@@ -1,9 +1,3 @@
-### features
-variable "enabled" {
-  description = "A conditional indicator to create resources"
-  default     = true
-}
-
 ### event source
 variable "event_config" {
   description = "Event rules configuration"
