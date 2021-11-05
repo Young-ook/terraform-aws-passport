@@ -16,7 +16,6 @@ module "badge" {
   source      = "../../"
   name        = var.name
   tags        = var.tags
-  aws_account = var.aws_account
   namespace   = var.namespace
 }
 
