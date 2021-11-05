@@ -8,16 +8,33 @@ provider "aws" {
 }
 
 module "badge" {
-  providers   = { aws = aws.badge }
-  source      = "../../"
-  name        = var.name
-  tags        = var.tags
-  aws_account = var.aws_account
-  namespace   = var.namespace
+  providers = { aws = aws.badge }
+  source    = "../../"
+  name      = var.name
+  tags      = var.tags
+  namespace = var.namespace
+}
+
+locals {
+  baseline_groups = []
+  bespoke_groups = [
+    {
+      name         = "developer"
+      namespace    = var.namespace
+      tags         = var.tags
+      target_roles = [module.bespoke["developer"].role.arn]
+    },
+    {
+      name         = "rescue"
+      namespace    = var.namespace
+      tags         = var.tags
+      target_roles = [module.bespoke["rescue"].role.arn]
+    }
+  ]
 }
 
 module "group" {
-  for_each     = { for group in concat(local.bespoke_groups, local.groups) : group.name => group }
+  for_each     = { for group in concat(local.bespoke_groups, local.baseline_groups) : group.name => group }
   providers    = { aws = aws.badge }
   depends_on   = [module.badge]
   source       = "Young-ook/passport/aws//modules/iam-group"
@@ -29,23 +46,7 @@ module "group" {
 }
 
 locals {
-  groups = []
-}
-
-module "user" {
-  for_each   = { for user in concat(local.bespoke_users, local.users) : user.name => user }
-  providers  = { aws = aws.badge }
-  depends_on = [module.badge]
-  source     = "Young-ook/passport/aws//modules/iam-user"
-  name       = lookup(each.value, "name")
-  namespace  = lookup(each.value, "namespace")
-  tags       = lookup(each.value, "tags")
-  features   = lookup(each.value, "features")
-  groups     = lookup(each.value, "groups")
-}
-
-locals {
-  users = [
+  baseline_users = [
     {
       name      = "security-officer@corp.com"
       namespace = var.namespace
@@ -57,4 +58,27 @@ locals {
       ]
     },
   ]
+  bespoke_users = [
+    {
+      name      = "developer@corp.com"
+      namespace = var.namespace
+      tags      = var.tags
+      features  = { login = true }
+      groups = [
+        module.badge.baseline.groups["badge"].name,
+      ]
+    },
+  ]
+}
+
+module "user" {
+  for_each   = { for user in concat(local.bespoke_users, local.baseline_users) : user.name => user }
+  providers  = { aws = aws.badge }
+  depends_on = [module.badge]
+  source     = "Young-ook/passport/aws//modules/iam-user"
+  name       = lookup(each.value, "name")
+  namespace  = lookup(each.value, "namespace")
+  tags       = lookup(each.value, "tags")
+  features   = lookup(each.value, "features")
+  groups     = lookup(each.value, "groups")
 }

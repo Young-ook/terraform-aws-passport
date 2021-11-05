@@ -44,34 +44,3 @@ module "bespoke" {
   policy_arns   = lookup(each.value, "policy_arns", [])
   trusted_roles = lookup(each.value, "trusted_roles", [])
 }
-
-locals {
-  bespoke_groups = [
-    {
-      name         = "developer"
-      namespace    = var.namespace
-      tags         = var.tags
-      target_roles = [module.bespoke["developer"].role.arn]
-    },
-    {
-      name         = "rescue"
-      namespace    = var.namespace
-      tags         = var.tags
-      target_roles = [module.bespoke["rescue"].role.arn]
-    }
-  ]
-}
-
-locals {
-  bespoke_users = [
-    {
-      name      = "developer@corp.com"
-      namespace = var.namespace
-      tags      = var.tags
-      features  = { login = true }
-      groups = [
-        module.badge.baseline.groups["badge"].name,
-      ]
-    },
-  ]
-}

@@ -1,8 +1,4 @@
 ### organization
-variable "aws_account" {
-  description = "The aws account id to apply on"
-}
-
 variable "namespace" {
   description = "Namespace to organizae the users and groups"
   default     = null
