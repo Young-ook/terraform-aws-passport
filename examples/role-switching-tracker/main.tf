@@ -32,8 +32,8 @@ locals {
 
 # zip arhive
 data "archive_file" "lambda_zip_file" {
-  output_path = "${path.module}/lambda_handler.zip"
-  source_dir  = "${path.module}/src/"
+  output_path = join("/", [path.module, "lambda_handler.zip"])
+  source_dir  = join("/", [path.module, "watchapp"])
   excludes    = ["__init__.py", "*.pyc"]
   type        = "zip"
 }
