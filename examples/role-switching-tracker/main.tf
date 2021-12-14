@@ -18,7 +18,7 @@ locals {
             detail = {
               eventName = ["AssumeRole"],
               requestParameters = {
-                roleArn = [module.bespoke["rescue"].role.arn]
+                roleArn = [module.role["rescue"].role.arn]
               }
             },
             detail-type = ["AWS API Call via CloudTrail"],
