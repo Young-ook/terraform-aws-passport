@@ -13,6 +13,17 @@ variable "namespace" {
   default     = null
 }
 
+### notification
+variable "slack_webhook_url" {
+  description = "Slack webhook url to send message"
+  sensitive   = true
+}
+
+variable "slack_channel" {
+  description = "Slack channel ID where you want to send message"
+  sensitive   = true
+}
+
 ### description
 variable "name" {
   description = "The logical name of the module instance"

@@ -47,5 +47,9 @@ module "uat" {
   lambda_config = {
     package = "lambda_handler.zip"
     handler = "lambda_handler.lambda_handler"
+    environment_variables = {
+      SLACK_WEBHOOK_URL = var.slack_webhook_url
+      SLACK_CHANNEL     = var.slack_channel
+    }
   }
 }
