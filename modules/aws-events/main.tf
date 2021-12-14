@@ -1,6 +1,7 @@
 module "event" {
   for_each    = local.event_config
   source      = "Young-ook/lambda/aws//modules/events"
+  version     = "~> 0.1"
   name        = join("-", [var.name, each.key])
   tags        = var.tags
   rule_config = each.value.rule_config
@@ -23,6 +24,7 @@ resource "aws_lambda_permission" "lambda" {
 # lambda
 module "lambda" {
   source         = "Young-ook/lambda/aws"
+  version        = "~> 0.1"
   name           = var.name
   tags           = var.tags
   lambda_config  = var.lambda_config
@@ -34,6 +36,7 @@ module "lambda" {
 # cloudwatch logs
 module "logs" {
   source     = "Young-ook/lambda/aws//modules/logs"
+  version    = "~> 0.1"
   name       = var.name
   tags       = var.tags
   log_config = var.log_config

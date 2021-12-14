@@ -14,20 +14,20 @@ locals {
       name         = "developer"
       namespace    = var.namespace
       tags         = var.tags
-      target_roles = [module.bespoke["developer"].role.arn]
+      target_roles = [module.role["developer"].role.arn]
     },
     {
       name         = "rescue"
       namespace    = var.namespace
       tags         = var.tags
-      target_roles = [module.bespoke["rescue"].role.arn]
+      target_roles = [module.role["rescue"].role.arn]
     }
   ]
 }
 
 module "group" {
-  for_each     = { for group in concat(local.bespoke_groups, local.baseline_groups) : group.name => group }
   depends_on   = [module.badge]
+  for_each     = { for group in concat(local.bespoke_groups, local.baseline_groups) : group.name => group }
   source       = "Young-ook/passport/aws//modules/iam-group"
   name         = lookup(each.value, "name")
   namespace    = lookup(each.value, "namespace")
@@ -57,18 +57,52 @@ locals {
       features  = { login = true }
       groups = [
         module.badge.baseline.groups["badge"].name,
+        module.group["developer"].group.name,
+        module.group["rescue"].group.name,
       ]
     },
   ]
 }
 
 module "user" {
-  for_each   = { for user in concat(local.bespoke_users, local.baseline_users) : user.name => user }
   depends_on = [module.badge]
+  for_each   = { for user in concat(local.bespoke_users, local.baseline_users) : user.name => user }
   source     = "Young-ook/passport/aws//modules/iam-user"
   name       = lookup(each.value, "name")
   namespace  = lookup(each.value, "namespace")
   tags       = lookup(each.value, "tags")
   features   = lookup(each.value, "features")
   groups     = lookup(each.value, "groups")
+}
+
+locals {
+  bespoke_roles = [
+    {
+      name      = "rescue"
+      namespace = var.namespace
+      tags      = var.tags
+      policy_arns = [
+        "arn:aws:iam::aws:policy/AdministratorAccess",
+      ]
+    },
+    {
+      name      = "developer"
+      namespace = var.namespace
+      tags      = var.tags
+      policy_arns = [
+        "arn:aws:iam::aws:policy/ReadOnlyAccess",
+      ]
+    },
+  ]
+}
+
+module "role" {
+  depends_on    = [module.badge]
+  for_each      = { for role in local.bespoke_roles : role.name => role }
+  source        = "Young-ook/passport/aws//modules/iam-role"
+  name          = lookup(each.value, "name")
+  namespace     = lookup(each.value, "namespace")
+  tags          = lookup(each.value, "tags")
+  policy_arns   = lookup(each.value, "policy_arns", [])
+  trusted_roles = lookup(each.value, "trusted_roles", [])
 }

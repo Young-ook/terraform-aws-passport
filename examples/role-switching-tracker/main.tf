@@ -18,7 +18,7 @@ locals {
             detail = {
               eventName = ["AssumeRole"],
               requestParameters = {
-                roleArn = [module.bespoke["rescue"].role.arn]
+                roleArn = [module.role["rescue"].role.arn]
               }
             },
             detail-type = ["AWS API Call via CloudTrail"],
@@ -32,20 +32,24 @@ locals {
 
 # zip arhive
 data "archive_file" "lambda_zip_file" {
-  output_path = "${path.module}/lambda_handler.zip"
-  source_dir  = "${path.module}/src/"
+  output_path = join("/", [path.module, "lambda_handler.zip"])
+  source_dir  = join("/", [path.module, "watchapp"])
   excludes    = ["__init__.py", "*.pyc"]
   type        = "zip"
 }
 
 module "uat" {
   depends_on   = [data.archive_file.lambda_zip_file]
-  source       = "../../modules/uat"
+  source       = "../../modules/aws-events"
   name         = var.name
   tags         = var.tags
   event_config = local.pattern_event
   lambda_config = {
     package = "lambda_handler.zip"
     handler = "lambda_handler.lambda_handler"
+    environment_variables = {
+      SLACK_WEBHOOK_URL = var.slack_webhook_url
+      SLACK_CHANNEL     = var.slack_channel
+    }
   }
 }
