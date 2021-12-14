@@ -1,11 +1,7 @@
-# Passport
-Passport is a terraform module for Cross-Account Identity and Access Management on AWS. For more details, please visit the [Passport](https://github.com/Young-ook/terraform-aws-passport) project page.
+# Role Switching Tracker for Passport
+Passport is a terraform module for Cross-Account Identity and Access Management on AWS. For more details, please visit the [Passport](https://github.com/Young-ook/terraform-aws-passport) project page. Badge AWS account is an identity gateway in a passport architecture where all user-role mappings accross accounts are managed.
 
-This ia a user activity (especially role switching with administrative roles) tracker for the passport project. This example detects an iam role switching event with Amazon EventBridge and send message using AWS Lambda function.
-
-
-## Badge account
-Badge AWS account is an identity gateway in a passport architecture where all user-role mappings accross accounts are managed.
+This ia a user activity (especially role switching with administrative roles) tracker for the passport project. This example uses Amazon EventBridge to detect an IAM role switching event, such as an IAM API call, and uses AWS Lambda function to send a notification via Slack. In this example uses `aws-events` module to build predefined application for AWS Event management. For more details, please visit the [page](https://github.com/Young-ook/terraform-aws-passport/blob/main/modules/aws-events).
 
 ## Download example
 Download this example on your workspace
