@@ -13,7 +13,7 @@ cd terraform-aws-passport/examples/role-switching-tracker
 ## Setup
 [This](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/role-switching-tracker/main.tf) is an example of terraform configuration file to create identity gateway account with baseline security policies and role switching tracker.
 
-If you don't have the terraform and kubernetes tools in your environment, go to the main [page](https://github.com/Young-ook/terraform-aws-eks) of this repository and follow the installation instructions.
+If you don't have the terraform and kubernetes tools in your environment, go to the main [page](https://github.com/Young-ook/terraform-aws-passport) of this repository and follow the installation instructions.
 
 Run terraform:
 ```
