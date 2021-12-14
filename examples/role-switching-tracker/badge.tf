@@ -57,6 +57,8 @@ locals {
       features  = { login = true }
       groups = [
         module.badge.baseline.groups["badge"].name,
+        module.group["developer"].group.name,
+        module.group["rescue"].group.name,
       ]
     },
   ]
