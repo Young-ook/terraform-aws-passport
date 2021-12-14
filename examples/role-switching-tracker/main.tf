@@ -40,7 +40,7 @@ data "archive_file" "lambda_zip_file" {
 
 module "uat" {
   depends_on   = [data.archive_file.lambda_zip_file]
-  source       = "../../modules/uat"
+  source       = "../../modules/aws-events"
   name         = var.name
   tags         = var.tags
   event_config = local.pattern_event
