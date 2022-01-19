@@ -12,7 +12,7 @@ cd terraform-aws-passport/examples/badge
 ```
 
 ## Setup
-[This](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/badge/main.tf) is an example of terraform configuration file to create identity gateway account with baseline security policies. To build your AWS account as a badge account, clone the example and run terraform apply.
+[This](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/badge/badge.tf) is an example of terraform configuration file to create identity gateway account with baseline security policies. To build your AWS account as a badge account, clone the example and run terraform apply.
 
 Run terraform:
 ```
