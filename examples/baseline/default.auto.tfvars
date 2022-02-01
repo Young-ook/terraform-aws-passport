@@ -1,7 +1,6 @@
-aws_account = "123456781029"
-aws_region  = "ap-northeast-2"
-namespace   = "corp"
-name        = "baseline"
+aws_region = "us-east-1"
+namespace  = null
+name       = null
 tags = {
   env = "dev"
 }
