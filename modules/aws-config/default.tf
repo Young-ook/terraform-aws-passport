@@ -89,11 +89,16 @@ locals {
       }
     },
     {
-      name             = "required-tags"
-      description      = "Checks if resources are deployed with configured tags."
-      input_parameters = jsonencode({})
+      name        = "required-tags"
+      description = "Checks if resources are deployed with configured tags."
+      input_parameters = jsonencode({
+        tag1Key = "terraform.io"
+        tag2Key = "environment"
+      })
       scope = {
-        compliance_resource_types = {}
+        compliance_resource_types = [
+          "S3::Bucket"
+        ]
       }
       source = {
         owner             = "AWS"
