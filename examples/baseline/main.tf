@@ -62,11 +62,6 @@ resource "aws_ssm_association" "patch-baseline" {
   }
 }
 
-resource "random_pet" "ruleslog" {
-  length    = 3
-  separator = "-"
-}
-
 module "rules" {
   source = "../../modules/aws-config"
   name   = var.name
