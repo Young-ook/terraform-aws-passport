@@ -61,3 +61,9 @@ resource "aws_ssm_association" "patch-baseline" {
     values = ["*"]
   }
 }
+
+module "rules" {
+  source = "../../modules/aws-config"
+  name   = var.name
+  tags   = var.tags
+}
