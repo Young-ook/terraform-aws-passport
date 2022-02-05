@@ -1,6 +1,6 @@
-### log
-variable "log_config" {
-  description = "Log configuration for function"
+### record
+variable "record_config" {
+  description = "awsconfig recorder configuration"
   default     = {}
 }
 
