@@ -105,3 +105,7 @@ output "nodes_sorted_by_name" {
     for n in local.nodes : n.name => n
   }
 }
+
+output "empty_list_for_each" {
+  value = { for k, v in [] : k => v }
+}
