@@ -1,9 +1,3 @@
-### features
-variable "enabled" {
-  description = "A conditional indicator to create resources"
-  default     = true
-}
-
 ### target roles
 variable "target_roles" {
   description = "A list of full arn of iam roles to allow assuming"
