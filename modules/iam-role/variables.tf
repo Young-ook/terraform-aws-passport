@@ -1,9 +1,3 @@
-### features
-variable "enabled" {
-  description = "A conditional indicator to create resources"
-  default     = true
-}
-
 ### trusted accounts 
 ### To allow assuming from badge users, the AWS account Id of badge account must be included in this list
 variable "trusted_roles" {

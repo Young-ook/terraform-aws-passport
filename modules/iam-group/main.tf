@@ -5,15 +5,14 @@ locals {
 
 # iam group module
 resource "aws_iam_group" "group" {
-  count = var.enabled ? 1 : 0
-  name  = local.name
-  path  = local.namespace
+  name = local.name
+  path = local.namespace
 }
 
 # security/policy
 resource "aws_iam_policy" "assume" {
-  count = local.assume_role_enabled && var.enabled ? 1 : 0
-  name  = join("-", [local.name, "assume"])
+  for_each = toset(local.assume_role_enabled ? ["assume"] : [])
+  name     = join("-", [local.name, "assume"])
   policy = jsonencode({
     Statement = [{
       Action   = "sts:AssumeRole"
@@ -25,13 +24,13 @@ resource "aws_iam_policy" "assume" {
 }
 
 resource "aws_iam_group_policy_attachment" "assume" {
-  count      = local.assume_role_enabled && var.enabled ? 1 : 0
-  policy_arn = aws_iam_policy.assume.0.arn
-  group      = aws_iam_group.group.0.name
+  for_each   = toset(local.assume_role_enabled ? ["assume"] : [])
+  policy_arn = aws_iam_policy.assume["assume"].arn
+  group      = aws_iam_group.group.name
 }
 
 resource "aws_iam_group_policy_attachment" "policy" {
-  for_each   = { for key, val in var.policy_arns : key => val if var.enabled }
+  for_each   = { for k, v in var.policy_arns : k => v }
   policy_arn = each.value
-  group      = aws_iam_group.group.0.name
+  group      = aws_iam_group.group.name
 }
