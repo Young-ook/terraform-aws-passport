@@ -2,7 +2,7 @@
 
 ### aws credential
 variable "aws_account" {
-  description = "The aws account id for the example (e.g. 857026751867)"
+  description = "The aws account id for the example (e.g. 111123456789)"
 }
 
 ### network
