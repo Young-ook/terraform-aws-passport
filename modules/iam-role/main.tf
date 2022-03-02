@@ -1,10 +1,7 @@
-data "aws_caller_identity" "current" {
-  count = var.enabled ? 1 : 0
-}
+data "aws_caller_identity" "current" {}
 
 # iam role module
 resource "aws_iam_role" "role" {
-  count                = var.enabled ? 1 : 0
   name                 = local.name
   path                 = local.namespace
   tags                 = merge(local.default-tags, var.tags)
@@ -15,7 +12,7 @@ resource "aws_iam_role" "role" {
       Effect = "Allow"
       Principal = {
         AWS = distinct(flatten([
-          data.aws_caller_identity.current.0.account_id,
+          data.aws_caller_identity.current.account_id,
           var.trusted_roles,
         ]))
       }
@@ -26,7 +23,7 @@ resource "aws_iam_role" "role" {
 
 # security/policy
 resource "aws_iam_role_policy_attachment" "policy" {
-  for_each   = { for key, val in var.policy_arns : key => val if var.enabled }
+  for_each   = { for k, v in var.policy_arns : k => v }
   policy_arn = each.value
-  role       = aws_iam_role.role.0.name
+  role       = aws_iam_role.role.name
 }
