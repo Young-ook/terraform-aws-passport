@@ -1,9 +1,4 @@
 ### features
-variable "enabled" {
-  description = "A conditional indicator to create resources"
-  default     = true
-}
-
 variable "features" {
   description = "A configuration map for feature toggle"
   default     = { "login" = false }
