@@ -1,7 +1,8 @@
 # output variables
 
 output "uat" {
-  value = module.uat
+  value     = module.uat
+  sensitive = true
 }
 
 output "group" {

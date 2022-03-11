@@ -1,29 +1,29 @@
 ### event source
-variable "event_config" {
+variable "rules" {
   description = "Event rules configuration"
   default     = {}
 }
 
 ### network
-variable "vpc_config" {
+variable "vpc" {
   description = "VPC configuration for function"
   default     = {}
 }
 
 ### compute
-variable "lambda_config" {
+variable "lambda" {
   description = "Lambda function configuration"
   default     = {}
 }
 
 ### log
-variable "log_config" {
+variable "log" {
   description = "Log configuration for function"
   default     = {}
 }
 
 ### tracing
-variable "tracing_config" {
+variable "tracing" {
   description = "AWS X-ray tracing configuration for function"
   default     = {}
 }
