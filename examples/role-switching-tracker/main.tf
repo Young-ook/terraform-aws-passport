@@ -8,26 +8,36 @@ provider "aws" {
   region = var.aws_region
 }
 
-# event pattern
+## event pattern
+## there are the definitions of roles in the badge.tf
+## if you want to see who can switch to a role, please refer to the file for details.
 locals {
-  pattern_event = {
-    pattern = {
-      rule_config = {
-        event_pattern = jsonencode(
-          {
-            detail = {
-              eventName = ["AssumeRole"],
-              requestParameters = {
-                roleArn = [module.role["rescue"].role.arn]
-              }
-            },
-            detail-type = ["AWS API Call via CloudTrail"],
-            source      = ["aws.sts"]
-          }
-        )
-      }
-    }
-  }
+  event_rules = [
+    {
+      name = "rescue-role-filter"
+      event_pattern = jsonencode({
+        detail = {
+          eventName = ["AssumeRole"],
+          requestParameters = {
+            roleArn = [module.role["rescue"].role.arn]
+        } },
+        detail-type = ["AWS API Call via CloudTrail"],
+        source      = ["aws.sts"]
+      })
+    },
+    {
+      name = "developer-role-filter"
+      event_pattern = jsonencode({
+        detail = {
+          eventName = ["AssumeRole"],
+          requestParameters = {
+            roleArn = [module.role["developer"].role.arn]
+        } },
+        detail-type = ["AWS API Call via CloudTrail"],
+        source      = ["aws.sts"]
+      })
+    },
+  ]
 }
 
 # zip arhive
@@ -39,12 +49,12 @@ data "archive_file" "lambda_zip_file" {
 }
 
 module "uat" {
-  depends_on   = [data.archive_file.lambda_zip_file]
-  source       = "../../modules/aws-events"
-  name         = var.name
-  tags         = var.tags
-  event_config = local.pattern_event
-  lambda_config = {
+  depends_on = [data.archive_file.lambda_zip_file]
+  source     = "../../modules/aws-events"
+  name       = var.name
+  tags       = var.tags
+  rules      = local.event_rules
+  lambda = {
     package = "lambda_handler.zip"
     handler = "lambda_handler.lambda_handler"
     environment_variables = {
