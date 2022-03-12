@@ -9,9 +9,10 @@ What is important thing in this system is that only `Security` role can manage r
 
 ## Examples
 - [Multi-Account RBAC with AWS IAM: badge account](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/badge)
-- [Multi-Account RBAC with AWS IAM: bespoke account](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/bespoke)
+- [Multi-Account RBAC with AWS IAM: bespoke account](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/rbac)
 - [Role Switching Tracker](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/role-switching-tracker)
 - [Terraform Playground](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/playground)
+- [Single-Account ABAC with AWS IAM](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/abac)
 
 ## Getting started
 ### AWS CLI

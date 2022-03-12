@@ -1,5 +1,5 @@
 namespace = "corp"
-name      = "passport"
+name      = "iam-rbac"
 features = {
   login = true
 }
