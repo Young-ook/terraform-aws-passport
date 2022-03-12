@@ -1,21 +1,19 @@
 module "event" {
-  for_each = { for r in var.rules : r.name => r }
-  source   = "Young-ook/lambda/aws//modules/eventbridge"
-  version  = "0.1.4"
-  name     = join("-", [var.name, each.key])
-  tags     = var.tags
-  rule     = each.value
+  source  = "Young-ook/lambda/aws//modules/eventbridge"
+  version = "0.2.0"
+  tags    = var.tags
+  rules   = var.rules
 }
 
 resource "aws_cloudwatch_event_target" "lambda" {
   for_each = { for r in var.rules : r.name => r }
-  rule     = module.event[each.key].rule.name
+  rule     = module.event.rules[each.key].name
   arn      = module.lambda.function.arn
 }
 
 resource "aws_lambda_permission" "lambda" {
   for_each      = { for r in var.rules : r.name => r }
-  source_arn    = module.event[each.key].rule.arn
+  source_arn    = module.event.rules[each.key].arn
   function_name = module.lambda.function.id
   action        = "lambda:InvokeFunction"
   principal     = "events.amazonaws.com"
