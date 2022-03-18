@@ -53,7 +53,7 @@ module "snapshot" {
 }
 
 resource "aws_config_configuration_recorder" "recorder" {
-  depends_on = [module.snapshot, aws_config_delivery_channel.recorder]
+  depends_on = [module.snapshot]
   name       = local.name
   role_arn   = aws_iam_role.awsconfig.arn
 
@@ -64,11 +64,13 @@ resource "aws_config_configuration_recorder" "recorder" {
 }
 
 resource "aws_config_configuration_recorder_status" "recorder" {
+  depends_on = [aws_config_delivery_channel.recorder]
   name       = aws_config_configuration_recorder.recorder.name
   is_enabled = true
 }
 
 resource "aws_config_delivery_channel" "recorder" {
+  depends_on     = [aws_config_configuration_recorder.recorder]
   name           = local.name
   s3_bucket_name = module.snapshot.bucket.id
   s3_key_prefix  = "awsconfig/records"
