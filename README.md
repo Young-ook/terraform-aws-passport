@@ -8,7 +8,8 @@ Individual users can assume cross-account roles defined in IAM policies attached
 What is important thing in this system is that only `Security` role can manage role mapping rules for the `badge` account. Recommend 3 users to have `Security` role for applying configuration and policy changes. It is necessary to establish a rule so that the permission policy can be updated only with the approval of at least 1 out of 3 security engineers.
 
 ## Examples
-- [Multi-Account RBAC with AWS IAM: bespoke account](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/rbac)
+- [Single-Account RBAC with AWS IAM](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/badge)
+- [Multi-Account RBAC with AWS IAM](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/rbac)
 - [Role Switching Activity Tracker](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/role-switching-tracker)
 - [Baseline for Compliance](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/baseline)
 - [Terraform Playground](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/playground)
