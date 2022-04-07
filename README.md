@@ -14,6 +14,7 @@ What is important thing in this system is that only `Security` role can manage r
 - [Baseline for Compliance](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/baseline)
 - [Terraform Playground](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/playground)
 - [Single-Account ABAC with AWS IAM](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/abac)
+- [Amazon Cognito Identity Provider](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/cognito)
 
 ## Getting started
 ### AWS CLI
