@@ -81,6 +81,10 @@ locals {
       name          = "al2"
       instance_type = "t3.small"
       ami_type      = "AL2_x86_64"
+      policy_arns = [
+        "arn:aws:iam::aws:policy/AdministratorAccess",
+        "arn:aws:iam::aws:policy/ReadOnlyAccess"
+      ]
     },
     {
       name          = "bottlerocket"
@@ -96,6 +100,7 @@ locals {
       name          = "al2-arm"
       instance_type = "m6g.medium"
       ami_type      = "AL2_ARM_64"
+      policy_arns   = ["arn:aws:iam::aws:policy/S3FullAccess"]
     },
   ]
 }
@@ -108,4 +113,14 @@ output "nodes_sorted_by_name" {
 
 output "empty_list_for_each" {
   value = { for k, v in [] : k => v }
+}
+
+locals {
+  role_policy_list = chunklist(flatten([
+    for k, v in local.nodes : setproduct([v.name], v.policy_arns) if length(lookup(v, "policy_arns", [])) > 0
+  ]), 2)
+}
+
+output "policies_per_node_role" {
+  value = [for p in local.role_policy_list : { role = p[0], policy = p[1] }]
 }
