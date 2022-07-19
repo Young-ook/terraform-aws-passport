@@ -20,6 +20,14 @@ terraform apply
 This module creates roles in the `bespoke` account for cross-role switching and baseline security rules to prevent disallowed software package installation.
 
 ## Verify
+AWS Config Compliance Dashboard
+![aws-config-compliance-dashboard](../../images/aws-config-compliance-dashboard.png)
+
+AWS Config Rules
+![aws-config-rule-list](../../images/aws-config-rule-list.png)
+
+AWS Config Rule: RDS Private Snapshot
+![aws-config-rule-rds-private-snapshot](../../images/aws-config-rule-rds-private-snapshot.png)
 
 ## Clean up
 Run terraform:
