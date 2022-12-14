@@ -41,3 +41,6 @@ tfenv use 0.11.14
 tfenv install latest
 tfenv use 1.0.3
 ```
+
+# Additional Resources
+- [AWS re:Invent 2022 - Reimagining multi-account deployments for security and speed (NFX305)](https://youtu.be/MKc9r6xOTpk)
