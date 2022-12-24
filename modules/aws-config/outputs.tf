@@ -1,4 +1,4 @@
-# output variables
+### output variables
 
 output "rules" {
   description = "The attributes of config rules"
