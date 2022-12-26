@@ -50,7 +50,8 @@ data "archive_file" "lambda_zip_file" {
 
 module "uat" {
   depends_on = [data.archive_file.lambda_zip_file]
-  source     = "../../modules/aws-events"
+  source     = "Young-ook/eventbridge/aws//modules/aws-events"
+  version    = "0.0.8"
   name       = var.name
   tags       = var.tags
   rules      = local.event_rules
