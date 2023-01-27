@@ -3,7 +3,7 @@
 
 ![aws-multi-account-passport-architecture](images/aws-multi-account-passport-architecture.png)
 
-Individual users can assume cross-account roles defined in IAM policies attached to IAM groups in the badge account. For example, if a user belongs to the *DataScientist* IAM group in the badge account, the user can switch to the *DataScientist* role in the *DataAnalyst* account if there is a policy to assume that role. In this case, *DataAnalyst* is one of the bespoke accounts. You can also create *Developer* role to give sandbox accounts full access, but restrict access to production environments.
+Individual users can assume cross-account roles defined in IAM policies attached to IAM groups in the badge account. For example, if a user belongs to the *DataScientist* IAM group in the badge account, the user can switch to the *DataScientist* role in the *Analytics* account if there is a policy to assume that role. In this case, *Analytics* is one of the bespoke accounts. You can also create *Developer* role to give sandbox accounts full access, but restrict access to production environments.
 
 What is important thing in this system is that only *Security* role can manage role mapping rules for the badge account. Recommend 3 users to have *Security* role for applying configuration and policy changes. It is necessary to establish a rule so that the permission policy can be updated only with the approval of at least 1 out of 3 security engineers.
 
