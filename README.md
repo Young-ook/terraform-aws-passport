@@ -9,7 +9,6 @@ What is important thing in this system is that only *Security* role can manage r
 
 ## Examples
 - [Passport Blueprint](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/blueprint)
-- [Baseline for Compliance](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/baseline)
 - [Terraform Playground](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/playground)
 - [Amazon Cognito Identity Provider](https://github.com/Young-ook/terraform-aws-passport/blob/main/examples/cognito)
 
