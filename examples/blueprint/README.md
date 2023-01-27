@@ -25,16 +25,14 @@ terraform apply -var-file fixture.tc1.tfvars
 ```
 
 ## AWS Accounts
-### Bespoke account(s)
-Bespoke AWS account is an account that we create for a specific purpose whthin the passport architecture. Bespoke allows users of the badge account, identity gateway, to assume into roles in bespoke account, such as adminstrator, data scientist, developer. Those roles in bespoke account can only be access by badge account users.
-
 ### Badge account
 Badge AWS account is an identity gateway in a passport architecture where all user-role mappings accross accounts are managed. First, we have to create a **badge** account for baseline.
 ```
 terraform apply --target module.badge
 ```
 
-Next, run terraform apply to create roles to the **bespoke** account. The developer role with read-only access policy and the rescue role with admin access policy will be created in the bespoke account for your application deployment.
+### Bespoke account(s)
+Bespoke AWS account is an account that we create for a specific purpose whthin the passport architecture. Bespoke allows users of the badge account, identity gateway, to assume into roles in bespoke account, such as adminstrator, data scientist, developer. Those roles in bespoke account can only be access by badge account users. Run terraform apply to create roles to the **bespoke** account. The developer role with read-only access policy and the rescue role with admin access policy will be created in the bespoke account for your application deployment.
 ```
 terraform apply --target module.bespoke
 ```
@@ -44,10 +42,10 @@ Finally, run the following command to associate the resources created in each ac
 terraform apply
 ```
 
-This module creates users and groups in the **badge** account with group and role mappings. And also, it creates roles in the **bespoke** account for cross-role switching. However, in this example, we are using the same aws account for simple testing.
+This module creates users and groups in the badge account with group and role mappings. And also, it creates roles in the bespoke account for cross-role switching. However, in this example, we are using the same aws account for simple testing.
 
 ### RBAC (Role-based Access Control)
-This example creates iam users in your badge account. You will find *joe* in the user list where in the IAM service page. You can switch to the *rescue* or *developer* role of the bespoke account if you are singed in as *joe* credential on AWS Console. Don't forget you must enable MFA (Multi-Factor Authenticator) of your user before you try to switch a role. Follow the [instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) to enable MFA device.
+This example creates iam users in your badge account. You will find *joe* in the user list where in the IAM service page. You can switch to the *rescue* or *developer* role of the bespoke account if you are singed in as *joe* credential on AWS Console. Don't forget you must enable MFA (Multi-Factor Authenticator) of your user before you try to switch a role. Follow the [instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html) to enable MFA device. Also, you can sign-in as *tom* to manage idnetity configurations (AWS IAM) on your badge account. You can switch to the *security-office* role taht has adminiatrative permission after signing-in *tom*.
 
 ### ABAC (Attribute Based Access Control)
 This example creates users in your account. Don't forget after the first login your IAM user, you must enable MFA (Multi-Factor Authenticator) in your account before you switch a role.
