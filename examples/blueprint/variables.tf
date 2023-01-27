@@ -2,7 +2,8 @@
 
 ### aws credential
 variable "aws_account" {
-  description = "The aws account id for the example (e.g. 111123456789)"
+  description = "The aws account id (e.g. 111123456789)"
+  default     = null
 }
 
 ### network
@@ -20,8 +21,18 @@ variable "namespace" {
 
 ### features
 variable "features" {
-  description = "A configuration map for feature toggle"
+  description = "Configuration map for feature toggle"
   default     = { "login" = false }
+}
+
+### notification
+variable "slack" {
+  description = "Configurations for Slack notification"
+  sensitive   = true
+  default = {
+    webhook_url = ""
+    channel     = ""
+  }
 }
 
 ### description
