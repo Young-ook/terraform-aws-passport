@@ -1,9 +1,4 @@
-## aws partitions
-module "current" {
-  source = "Young-ook/spinnaker/aws//modules/aws-partitions"
-}
-
-## aws config
+### aws config
 # security/policy
 resource "aws_iam_role" "awsconfig" {
   name = local.name
@@ -13,7 +8,7 @@ resource "aws_iam_role" "awsconfig" {
       Action = "sts:AssumeRole"
       Effect = "Allow"
       Principal = {
-        Service = format("config.%s", module.current.partition.dns_suffix)
+        Service = format("config.%s", module.aws.partition.dns_suffix)
       }
     }]
     Version = "2012-10-17"
@@ -21,7 +16,7 @@ resource "aws_iam_role" "awsconfig" {
 }
 
 resource "aws_iam_role_policy_attachment" "awsconfig" {
-  policy_arn = format("arn:%s:iam::aws:policy/service-role/AWS_ConfigRole", module.current.partition.partition)
+  policy_arn = format("arn:%s:iam::aws:policy/service-role/AWS_ConfigRole", module.aws.partition.partition)
   role       = aws_iam_role.awsconfig.id
 }
 
