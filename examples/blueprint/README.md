@@ -60,6 +60,19 @@ In this example, slack integration requires two sensitive credentials: `slack we
 
 After **WatchApp** has been deployed, you can start tracking for role switching in your badge account. When a developer user changed his/her role to the *develper* or *rescue* you will receive a message on slack channel that you integrated with **WatchApp**. To test if the user activity tracker is working well, try to sign-in as a developer user with MFA token. Then, change your role to *developer* or *rescue* by following this [guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html). Don't forget you must enable MFA (Multi-Factor Authenticator) of your user before you try to switch a role.
 
+## Baseline
+There are a few different ways to interpret what defines baseline security. According to the National Institute of Standards and Technology (NIST), a “security control baseline” refers to  “the set of minimum security controls defined for a low-impact, moderate-impact, or high-impact information system. Microsoft, on the other hand, identifies security baselines simply as standards defined by individual organizations that apps and devices must be compliant with. With Blueprint, you describe a configuration for the desired state of a security assurance approach that formalizes AWS account design, automates security controls, and streamlines auditing. In this example, you can learn how to check your environment against security industry standards and best practices and how to apply baseline security rules to prevent disallowed software package installation.
+
+AWS Config Compliance Dashboard
+![aws-config-compliance-dashboard](../../images/aws-config-compliance-dashboard.png)
+
+AWS Config Rules
+![aws-config-rule-list](../../images/aws-config-rule-list.png)
+
+AWS Config Rule: RDS Private Snapshot
+![aws-config-rule-rds-private-snapshot](../../images/aws-config-rule-rds-private-snapshot.png)
+
+
 ## Clean up
 To destroy all infrastrcuture, run terraform:
 ```

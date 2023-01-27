@@ -224,3 +224,24 @@ module "uat" {
     }
   }
 }
+
+### compliance/baseline
+resource "aws_ssm_association" "patch-baseline" {
+  name             = "AWS-RunPatchBaseline"
+  association_name = "weekly-patch-baseline"
+  parameters = {
+    Operation = "Install"
+  }
+  targets {
+    key    = "InstanceIds"
+    values = ["*"]
+  }
+}
+
+### compliance/guardrail
+module "guardrail" {
+  source  = "Young-ook/passport/aws//modules/aws-config"
+  version = "0.0.7"
+  name    = var.name
+  tags    = var.tags
+}
