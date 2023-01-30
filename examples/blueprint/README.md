@@ -52,7 +52,6 @@ This example creates users in your account. Don't forget after the first login y
 
 ![aws-iam-abac](../../images/aws-iam-abac.png)
 
-
 ## Role Switching Tracker
 **WatchApp** ia an event-driven serverless application for user activity (especially role switching with administrative roles) tracking. This example uses Amazon EventBridge to detect an IAM role switching event, such as an IAM API call, and uses AWS Lambda function to send a notification via Slack. In this example uses *aws-events* module to build predefined application for AWS Event management. For more details, please visit the [page](https://github.com/Young-ook/terraform-aws-eventbridge/blob/main/modules/aws-events).
 
@@ -72,6 +71,9 @@ AWS Config Rules
 AWS Config Rule: RDS Private Snapshot
 ![aws-config-rule-rds-private-snapshot](../../images/aws-config-rule-rds-private-snapshot.png)
 
+## Cognito IdP
+
+![aws-cognito-scenario](../../images/aws-cognito-scenario.png)
 
 ## Clean up
 To destroy all infrastrcuture, run terraform:
