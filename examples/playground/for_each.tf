@@ -124,3 +124,45 @@ locals {
 output "policies_per_node_role" {
   value = [for p in local.role_policy_list : { role = p[0], policy = p[1] }]
 }
+
+locals {
+  sagemaker_lifecycle_config_selection = ["hello", "hi"]
+  sagemaker_lifecycle_config_list = {
+    hello = {
+      arn                              = "aws:arn:sagemaker:ap-northeast-2:hello"
+      id                               = "ZWNoby"
+      studio_lifecycle_config_app_type = "JupyterServer"
+      studio_lifecycle_config_content  = "ZWNobyBoZWxsbw=="
+      studio_lifecycle_config_name     = "hello"
+    }
+    hi = {
+      arn                              = "aws:arn:sagemaker:ap-northeast-2:hi"
+      id                               = "ZWNoby"
+      studio_lifecycle_config_app_type = "JupyterServer"
+      studio_lifecycle_config_content  = "ZWNobyBoZWxsbw=="
+      studio_lifecycle_config_name     = "hi"
+    }
+    haha = {
+      arn                              = "aws:arn:sagemaker:ap-northeast-2:haha"
+      id                               = "ZWNoby"
+      studio_lifecycle_config_app_type = "KernelGateway"
+      studio_lifecycle_config_content  = "ZWNobyBoZWxsbw=="
+      studio_lifecycle_config_name     = "haha"
+    }
+    yellow = {
+      arn                              = "aws:arn:sagemaker:ap-northeast-2:yellow"
+      id                               = "ZWNoby"
+      studio_lifecycle_config_app_type = "KernelGateway"
+      studio_lifecycle_config_content  = "ZWNobyBoZWxsbw=="
+      studio_lifecycle_config_name     = "yellow"
+    }
+  }
+}
+
+output "sagemaker_lifecycle_config_arns" {
+  value = { for k, v in local.sagemaker_lifecycle_config_list : k => v.arn }
+}
+
+output "sagemaker_lifecycle_config_selection" {
+  value = { for k in local.sagemaker_lifecycle_config_selection : k => { for k, v in local.sagemaker_lifecycle_config_list : k => v.arn }[k] }
+}
