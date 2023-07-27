@@ -294,3 +294,8 @@ resource "aws_iam_policy" "put-events" {
     ]
   })
 }
+
+### organization
+module "aws-org" {
+  source = "../../modules/aws-organization"
+}
