@@ -298,4 +298,14 @@ resource "aws_iam_policy" "put-events" {
 ### organization
 module "aws-org" {
   source = "../../modules/aws-organization"
+  organization_units = [
+    {
+      name      = "security"
+      parent_id = module.aws-org.organization.roots[0].id
+    },
+    {
+      name      = "data"
+      parent_id = module.aws-org.organization.roots[0].id
+    },
+  ]
 }
