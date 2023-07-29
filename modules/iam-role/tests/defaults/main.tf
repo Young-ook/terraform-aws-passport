@@ -22,7 +22,7 @@ resource "test_assertions" "pet_name" {
 
 resource "test_assertions" "role_name" {
   component = "custom_name"
-  check "pet_name" {
+  check "custom_name" {
     description = "custom role name"
     condition   = can(regex("^security", module.main["security"].role.name))
   }

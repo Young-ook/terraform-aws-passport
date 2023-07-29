@@ -22,7 +22,7 @@ resource "test_assertions" "pet_name" {
 
 resource "test_assertions" "group_name" {
   component = "custom_name"
-  check "pet_name" {
+  check "custom_name" {
     description = "custom group name"
     condition   = can(regex("^cost-center", module.main["cost-center"].group.name))
   }

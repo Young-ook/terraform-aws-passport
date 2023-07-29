@@ -22,7 +22,7 @@ resource "test_assertions" "pet_name" {
 
 resource "test_assertions" "user_name" {
   component = "custom_name"
-  check "pet_name" {
+  check "custom_name" {
     description = "custom user name"
     condition   = can(regex("^joe", module.main["joe"].user.name))
   }
