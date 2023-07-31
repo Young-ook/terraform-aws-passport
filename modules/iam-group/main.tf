@@ -1,15 +1,14 @@
-# feature
+### feature
 locals {
   assume_role_enabled = var.target_roles != null ? (length(var.target_roles) > 0 ? true : false) : false
 }
 
-# iam group module
 resource "aws_iam_group" "group" {
   name = local.name
   path = local.namespace
 }
 
-# security/policy
+### security/policy
 resource "aws_iam_policy" "assume" {
   for_each = toset(local.assume_role_enabled ? ["assume"] : [])
   name     = join("-", [local.name, "assume"])

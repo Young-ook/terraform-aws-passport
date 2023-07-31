@@ -1,3 +1,5 @@
+### input variables
+
 ### target roles
 variable "target_roles" {
   description = "A list of full arn of iam roles to allow assuming"
