@@ -1,4 +1,4 @@
-# output variables
+### output variables
 
 output "group" {
   description = "The attributes of generated group"

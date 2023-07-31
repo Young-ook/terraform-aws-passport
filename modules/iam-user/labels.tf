@@ -1,11 +1,13 @@
-resource "random_pet" "name" {
-  length    = 3
-  prefix    = "iam"
-  separator = "-"
+### frigga name
+module "frigga" {
+  source  = "Young-ook/spinnaker/aws//modules/frigga"
+  version = "2.3.5"
+  name    = var.name == null || var.name == "" ? "usr" : var.name
+  petname = var.name == null || var.name == "" ? true : false
 }
 
 locals {
-  name      = var.name == null ? random_pet.name.id : var.name
+  name      = module.frigga.name
   namespace = var.namespace == null ? "/" : join("/", ["", var.namespace, ""])
   default-tags = merge(
     { "terraform.io" = "managed" },
