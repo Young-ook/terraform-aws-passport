@@ -1,3 +1,5 @@
+### input variables
+
 ### trusted accounts 
 ### To allow assuming from badge users, the AWS account Id of badge account must be included in this list
 variable "trusted_roles" {
