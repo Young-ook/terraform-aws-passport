@@ -1,3 +1,5 @@
+### input variables
+
 ### features
 variable "features" {
   description = "A configuration map for feature toggle"
