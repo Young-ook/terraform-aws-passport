@@ -62,14 +62,13 @@ After **WatchApp** has been deployed, you can start tracking for role switching 
 ## Baseline
 There are a few different ways to interpret what defines baseline security. According to the National Institute of Standards and Technology (NIST), a “security control baseline” refers to  “the set of minimum security controls defined for a low-impact, moderate-impact, or high-impact information system. Microsoft, on the other hand, identifies security baselines simply as standards defined by individual organizations that apps and devices must be compliant with. With Blueprint, you describe a configuration for the desired state of a security assurance approach that formalizes AWS account design, automates security controls, and streamlines auditing. In this example, you can learn how to check your environment against security industry standards and best practices and how to apply baseline security rules to prevent disallowed software package installation.
 
-AWS Config Compliance Dashboard
-![aws-config-compliance-dashboard](../../images/aws-config-compliance-dashboard.png)
-
-AWS Config Rules
-![aws-config-rule-list](../../images/aws-config-rule-list.png)
-
-AWS Config Rule: RDS Private Snapshot
-![aws-config-rule-rds-private-snapshot](../../images/aws-config-rule-rds-private-snapshot.png)
+Here are screenshots of aws config examples.
+- AWS Config Compliance Dashboard: Use the Dashboard to see an overview of your resources, rules, conformance packs, and their compliance states and to visualize your AWS Config usage and success metrics with Amazon CloudWatch. 
+  ![aws-config-compliance-dashboard](../../images/aws-config-compliance-dashboard.png)
+- AWS Config Rules: AWS Config provides AWS managed rules, which are predefined, customizable rules that AWS Config uses to evaluate whether your AWS resources comply with common best practices. For example, you could use a managed rule to quickly start assessing whether your Amazon Elastic Block Store (Amazon EBS) volumes are encrypted or whether specific tags are applied to your resources. The AWS Config console guides you through the process of configuring and activating a managed rule.
+  ![aws-config-rule-list](../../images/aws-config-rule-list.png)  
+- RDS Private Snapshot: Checks if Amazon Relational Database Service (Amazon RDS) snapshots are public. The rule is NON_COMPLIANT if any existing and new Amazon RDS snapshots are public.
+  ![aws-config-rule-rds-private-snapshot](../../images/aws-config-rule-rds-private-snapshot.png)
 
 ## Cognito IdP
 
