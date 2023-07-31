@@ -1,15 +1,13 @@
-resource "random_string" "uid" {
-  length  = 12
-  upper   = false
-  lower   = true
-  number  = false
-  special = false
+### frigga name
+module "frigga" {
+  source  = "Young-ook/spinnaker/aws//modules/frigga"
+  version = "2.3.5"
+  name    = var.name == null || var.name == "" ? "cognito" : var.name
+  petname = var.name == null || var.name == "" ? true : false
 }
 
 locals {
-  service = "cognito"
-  uid     = join("-", [local.service, random_string.uid.result])
-  name    = var.name == null || var.name == "" ? local.uid : var.name
+  name = module.frigga.name
   default-tags = merge(
     { "terraform.io" = "managed" },
     { "Name" = local.name },
@@ -20,6 +18,6 @@ resource "random_string" "extid" {
   length  = 16
   upper   = true
   lower   = false
-  number  = false
+  numeric = false
   special = false
 }
