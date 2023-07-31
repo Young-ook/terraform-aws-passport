@@ -8,11 +8,17 @@ provider "aws" {
   region = var.aws_region
 }
 
+### random pet name
+resource "random_pet" "name" {
+  length    = 3
+  separator = "-"
+}
+
 ### id-gateway account baseline security
 module "badge" {
   source    = "Young-ook/passport/aws"
   version   = "0.0.7"
-  name      = var.name
+  name      = random_pet.name.id
   tags      = var.tags
   namespace = var.namespace
 }
@@ -136,7 +142,7 @@ module "bespoke" {
 
 ### security/policy
 resource "aws_iam_policy" "cost-center" {
-  name   = join("-", [var.name, "cost-center"])
+  name   = join("-", [random_pet.name.id, "cost-center"])
   policy = file("policy.json")
 }
 
@@ -144,7 +150,7 @@ resource "aws_iam_policy" "cost-center" {
 module "vpc" {
   source  = "Young-ook/vpc/aws"
   version = "1.0.3"
-  name    = var.name
+  name    = random_pet.name.id
   tags    = var.tags
 }
 
@@ -152,7 +158,7 @@ module "vpc" {
 module "ec2" {
   source  = "Young-ook/ssm/aws"
   version = "1.0.5"
-  name    = var.name
+  name    = random_pet.name.id
   tags    = var.tags
   subnets = values(module.vpc.subnets["public"])
   node_groups = [
@@ -212,7 +218,7 @@ module "uat" {
   depends_on = [data.archive_file.lambda_zip_file]
   source     = "Young-ook/eventbridge/aws//modules/aws-events"
   version    = "0.0.8"
-  name       = var.name
+  name       = random_pet.name.id
   tags       = var.tags
   rules      = local.event_rules
   lambda = {
@@ -242,7 +248,7 @@ resource "aws_ssm_association" "patch-baseline" {
 module "guardrail" {
   source  = "Young-ook/passport/aws//modules/aws-config"
   version = "0.0.7"
-  name    = var.name
+  name    = random_pet.name.id
   tags    = var.tags
 }
 
@@ -250,8 +256,8 @@ module "guardrail" {
 module "idp" {
   source  = "Young-ook/passport/aws//modules/cognito"
   version = "0.0.7"
-  name   = var.name
-  tags   = var.tags
+  name    = random_pet.name.id
+  tags    = var.tags
   policy_arns = {
     authenticated   = [aws_iam_policy.put-events.arn]
     unauthenticated = [aws_iam_policy.put-events.arn]
@@ -259,14 +265,9 @@ module "idp" {
 }
 
 ### analytics
-resource "random_pet" "name" {
-  length    = 3
-  separator = "-"
-}
-
 resource "aws_pinpoint_app" "marketing" {
   name = random_pet.name.id
-  tags   = var.tags
+  tags = var.tags
 }
 
 resource "aws_iam_policy" "put-events" {
@@ -292,4 +293,19 @@ resource "aws_iam_policy" "put-events" {
       },
     ]
   })
+}
+
+### organization
+module "aws-org" {
+  source = "../../modules/aws-organization"
+  organization_units = [
+    {
+      name      = "security"
+      parent_id = module.aws-org.organization.roots[0].id
+    },
+    {
+      name      = "data"
+      parent_id = module.aws-org.organization.roots[0].id
+    },
+  ]
 }
