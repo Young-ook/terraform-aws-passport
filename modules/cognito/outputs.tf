@@ -1,3 +1,5 @@
+### output variables
+
 output "idp" {
   description = "Attributes of Cognito IdP"
   value = {

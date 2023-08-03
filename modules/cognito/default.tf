@@ -1,4 +1,8 @@
-# default variables
+### default variables
+
+module "aws" {
+  source = "Young-ook/spinnaker/aws//modules/aws-partitions"
+}
 
 locals {
   default_auto_verified_attributes = ["email"]
