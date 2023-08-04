@@ -1,6 +1,4 @@
-data "aws_caller_identity" "current" {}
-
-# iam role module
+### security/role
 resource "aws_iam_role" "role" {
   name                 = local.name
   path                 = local.namespace
@@ -12,7 +10,7 @@ resource "aws_iam_role" "role" {
       Effect = "Allow"
       Principal = {
         AWS = distinct(flatten([
-          data.aws_caller_identity.current.account_id,
+          module.aws.caller.account_id,
           var.trusted_roles,
         ]))
       }
@@ -21,7 +19,7 @@ resource "aws_iam_role" "role" {
   })
 }
 
-# security/policy
+### security/policy
 resource "aws_iam_role_policy_attachment" "policy" {
   for_each   = { for k, v in var.policy_arns : k => v }
   policy_arn = each.value
