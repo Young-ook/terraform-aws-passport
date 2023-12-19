@@ -53,3 +53,4 @@ tfenv use <version>
 
 # Additional Resources
 - [AWS re:Invent 2022 - Reimagining multi-account deployments for security and speed (NFX305)](https://youtu.be/MKc9r6xOTpk)
+- [RBAC with AWS IAM](https://youngookkim.tistory.com/80)
