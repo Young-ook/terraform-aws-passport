@@ -126,6 +126,40 @@ output "policies_per_node_role" {
 }
 
 locals {
+  pod_identities = [
+    {
+      name = "hello_role"
+      policy_arns = [
+        "arn:aws:iam::aws:policy/AdministratorAccess",
+        "arn:aws:iam::aws:policy/ReadOnlyAccess"
+      ]
+    },
+    {
+      name = "hi_role"
+      policy_arns = [
+        "arn:aws:iam::aws:policy/PowerUserAccess"
+      ]
+    },
+    {
+      name        = "greetings_role"
+      policy_arns = ["arn:aws:iam::aws:policy/S3FullAccess"]
+    },
+  ]
+}
+
+locals {
+  pod_identities_list = [
+    for p in chunklist(flatten([
+      for k, v in local.pod_identities : setproduct(v.policy_arns, [k]) if length(lookup(v, "policy_arns", [])) > 0
+    ]), 2) : { arn = p[0], role = p[1] }
+  ]
+}
+
+output "pod_identities_list" {
+  value = local.pod_identities_list
+}
+
+locals {
   sagemaker_lifecycle_config_selection = ["hello", "hi"]
   sagemaker_lifecycle_config_list = {
     hello = {
