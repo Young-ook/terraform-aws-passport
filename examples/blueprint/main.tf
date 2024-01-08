@@ -309,3 +309,8 @@ module "aws-org" {
     },
   ]
 }
+
+### iam access analyzer
+module "iam-audit" {
+  source = "../../modules/iam-access-analyzer"
+}
