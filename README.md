@@ -1,4 +1,7 @@
 # Passport
+![nicole-geri-gMJ3tFOLvnA-unsplash](images/nicole-geri-gMJ3tFOLvnA-unsplash.jpg)
+Photo by [Nicole Geri](https://unsplash.com/@nicolegeri?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/passport-booklet-on-top-of-white-paper-gMJ3tFOLvnA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+
 [Passport](https://github.com/Young-ook/terraform-aws-passport) is a project for fine-grained multi-aws account role switching platform. It supports baseline security policies and best practicies. There is identity gateway account we called **badge** account for management of user identity and group membership to allow users to assume to the authorized role in the target AWS account. The target account we called **bespoke** account is purpose built AWS account. We can transform that account to run the production environment resources only. Also, we can make the bespoke account to the control tower of the whole network configuration for the organization. In this case, allowed administators can touch the VPC resources and share them to the other bespoke accounts to use them. Passport is very flexible for categorization of AWS acouunt to meet the requirement from organization.
 
 ![aws-multi-account-passport-architecture](images/aws-multi-account-passport-architecture.png)
