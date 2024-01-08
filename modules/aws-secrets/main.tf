@@ -1,10 +1,9 @@
 ## secret manager
 
-# parameters
-locals {
-}
+### parameters
+locals {}
 
-# security/policy
+### security/policy
 resource "aws_iam_policy" "read" {
   name        = format("%s-read", local.name)
   description = format("Allow to get secrets")
@@ -34,7 +33,7 @@ resource "aws_iam_policy" "read" {
   })
 }
 
-# security/secret
+### security/secret
 resource "aws_secretsmanager_secret" "secret" {
   name = local.name
   tags = var.tags
