@@ -1,9 +1,10 @@
 locals {
   vpcs = {
     ingress = {
-      cidr    = "10.10.0.0/16"
-      vpc     = "module.ingress.vpc.id"
-      subnets = "values(module.ingress.subnets.private)"
+      cidr         = "10.10.0.0/16"
+      vpc          = "module.ingress.vpc.id"
+      subnets      = ["subnet-0f58e7faee1b96b1c", "subnet-0f61bbe2fa803315b", "subnet-0efed735aee672f5a"]
+      route_tables = ["rtb-0e0cfc6ebda03315b", "rtb-0e5e13733f2cb7a54", "rtb-06b757b65e8eb80b2"]
       routes = [
         {
           destination_cidr_block = "10.20.0.0/16"
@@ -15,9 +16,10 @@ locals {
       ]
     }
     egress = {
-      cidr    = "10.20.0.0/16"
-      vpc     = "module.egress.vpc.id"
-      subnets = "values(module.egress.subnets.public)"
+      cidr         = "10.20.0.0/16"
+      vpc          = "module.egress.vpc.id"
+      subnets      = ["subnet-0e0cfc6ebda03315b", "subnet-0e5e13733f2cb7a54", "subnet-06b757b65e8eb80b2"]
+      route_tables = ["rtb-034471a119efa57ea", "rtb-01c777d570d4036a3", "rtb-0dd8021c52c834044"]
       routes = [
         {
           destination_cidr_block = "10.10.0.0/16"
@@ -27,7 +29,8 @@ locals {
     corp = {
       cidr                                            = "172.16.0.0/16"
       vpc                                             = "module.corp.vpc.id"
-      subnets                                         = "values(module.corp.subnets.private)"
+      subnets                                         = ["subnet-0d28e7feecfb96b27", "subnet-0f65b932f91a3f83b", "subnet-0958e39e404671f5a"]
+      route_tables                                    = ["rtb-005ba186f9ec96fa6"]
       transit_gateway_default_route_table_propagation = false
       transit_gateway_default_route_table_association = false
       routes = [
@@ -50,6 +53,12 @@ locals {
     2) : merge(e[0], e[1])
   ]
 
+  vpc_route_tables = [
+    for e in chunklist(flatten([
+      for k, v in local.vpcs : setproduct(try(v["route_tables"], []), [ for r in try(v["routes"], []) : r.destination_cidr_block ])
+    ]), 2) : { rt = e[0], cidr = e[1] }
+  ]
+
   vpc_attachments_without_default_route_table_association = {
     for k, v in local.vpcs : k => v if !lookup(v, "transit_gateway_default_route_table_association", true)
   }
@@ -60,7 +69,10 @@ locals {
 }
 
 output "vpcs_with_routes" {
-  value = local.vpc_attachments_with_routes
+  value = {
+    routes       = local.vpc_attachments_with_routes
+    route_tables = local.vpc_route_tables
+  }
 }
 
 output "vpc_attachments_without_default_route_table_association" {
