@@ -55,7 +55,7 @@ locals {
 
   vpc_route_tables = [
     for e in chunklist(flatten([
-      for k, v in local.vpcs : setproduct(try(v["route_tables"], []), [ for r in try(v["routes"], []) : r.destination_cidr_block ])
+      for k, v in local.vpcs : setproduct(try(v["route_tables"], []), [for r in try(v["routes"], []) : r.destination_cidr_block])
     ]), 2) : { rt = e[0], cidr = e[1] }
   ]
 
@@ -211,4 +211,22 @@ output "sagemaker_lifecycle_config_arns" {
 
 output "sagemaker_lifecycle_config_selection" {
   value = { for k in local.sagemaker_lifecycle_config_selection : k => { for k, v in local.sagemaker_lifecycle_config_list : k => v.arn }[k] }
+}
+
+
+locals {
+  event_rules = [
+    {
+      name                = "scheduled_job"
+      schedule_expression = "rate(5 minutes)"
+    },
+    {
+      name          = "pattern_event"
+      event_pattern = "event-pattern-example.json"
+    },
+  ]
+}
+
+output "event_rule_targets" {
+  value = [for k, v in local.event_rules : { rule = v.name, arn = "lambda.function.arn" }]
 }
