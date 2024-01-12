@@ -1,7 +1,16 @@
-### default variables
+### default values
 
+### aws partitions
 module "aws" {
   source = "Young-ook/spinnaker/aws//modules/aws-partitions"
+}
+
+locals {
+  aws = {
+    region  = module.aws.region.name
+    account = module.aws.caller.account_id
+    dns     = module.aws.partition.dns_suffix
+  }
 }
 
 locals {
