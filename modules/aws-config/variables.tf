@@ -7,6 +7,7 @@ variable "record_config" {
 ### description
 variable "name" {
   description = "The logical name of user"
+  type        = string
   default     = null
 }
 
