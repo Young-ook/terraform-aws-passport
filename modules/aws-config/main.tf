@@ -1,5 +1,6 @@
 ### aws config
-# security/policy
+
+### security/policy
 resource "aws_iam_role" "awsconfig" {
   name = local.name
   tags = merge(local.default-tags, var.tags)
@@ -38,8 +39,8 @@ resource "aws_iam_role_policy" "noti" {
   })
 }
 
-# recorder
-# compliance/audit
+### recorder
+### compliance/audit
 module "snapshot" {
   source        = "Young-ook/sagemaker/aws//modules/s3"
   name          = local.name
@@ -81,7 +82,7 @@ resource "aws_config_delivery_channel" "recorder" {
   */
 }
 
-# compliance/rules
+### compliance/rules
 resource "aws_config_config_rule" "rules" {
   depends_on                  = [aws_config_configuration_recorder_status.recorder]
   for_each                    = { for rule in local.default_config_rules : rule.name => rule }
@@ -104,7 +105,7 @@ resource "aws_config_config_rule" "rules" {
   }
 }
 
-# notification
+### notification
 resource "aws_sns_topic" "noti" {
   name = local.name
 }
