@@ -7,6 +7,7 @@ variable "organization_units" {
 ### description
 variable "name" {
   description = "The logical name of origanization"
+  type        = string
   default     = null
 }
 
