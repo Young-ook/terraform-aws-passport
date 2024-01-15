@@ -7,9 +7,10 @@ module "aws" {
 
 locals {
   aws = {
-    region  = module.aws.region.name
-    account = module.aws.caller.account_id
-    dns     = module.aws.partition.dns_suffix
+    dns       = module.aws.partition.dns_suffix
+    partition = module.aws.partition.partition
+    region    = module.aws.region.name
+    id        = module.aws.caller.account_id
   }
 }
 
