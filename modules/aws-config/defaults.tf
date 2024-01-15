@@ -1,6 +1,6 @@
 ### default variables
 
-## aws partitions
+### aws partitions
 module "aws" {
   source = "Young-ook/spinnaker/aws//modules/aws-partitions"
 }
