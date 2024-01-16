@@ -149,7 +149,7 @@ resource "aws_iam_policy" "cost-center" {
 ### network/vpc
 module "vpc" {
   source  = "Young-ook/vpc/aws"
-  version = "1.0.3"
+  version = "1.0.7"
   name    = random_pet.name.id
   tags    = var.tags
 }
