@@ -14,6 +14,7 @@ variable "policy_arns" {
 variable "name" {
   description = "The logical name of the module instance"
   type        = string
+  default     = null
 }
 
 ### tags

@@ -1,14 +1,6 @@
 ### managed identity provider service
 
-locals {
-  aws = {
-    region  = module.aws.region.name
-    account = module.aws.caller.account_id
-    dns     = module.aws.partition.dns_suffix
-  }
-}
-
-# security/policy
+### security/policy
 resource "aws_iam_role" "cognito" {
   name = local.name
   tags = merge(local.default-tags, var.tags)
@@ -139,7 +131,7 @@ resource "aws_iam_policy" "cognito-sync" {
   })
 }
 
-# security/idp
+### security/idp
 resource "aws_cognito_user_pool" "idp" {
   name                     = replace(local.name, "-", "_")
   tags                     = merge(local.default-tags, var.tags)
