@@ -34,3 +34,6 @@ override.tf.json
 
 # Local .zip files for lambda package archive
 **/examples/**/*.zip
+
+# Local .DS_Store
+**/.DS_Store
