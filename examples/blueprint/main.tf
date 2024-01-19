@@ -149,7 +149,7 @@ resource "aws_iam_policy" "cost-center" {
 ### network/vpc
 module "vpc" {
   source  = "Young-ook/vpc/aws"
-  version = "1.0.3"
+  version = "1.0.7"
   name    = random_pet.name.id
   tags    = var.tags
 }
@@ -217,16 +217,18 @@ data "archive_file" "lambda_zip_file" {
 module "uat" {
   depends_on = [data.archive_file.lambda_zip_file]
   source     = "Young-ook/eventbridge/aws//modules/aws-events"
-  version    = "0.0.8"
+  version    = "0.0.16"
   name       = random_pet.name.id
   tags       = var.tags
   rules      = local.event_rules
   lambda = {
-    package = "lambda_handler.zip"
-    handler = "lambda_handler.lambda_handler"
-    environment_variables = {
-      SLACK_WEBHOOK_URL = lookup(var.slack, "webhook_url", "")
-      SLACK_CHANNEL     = lookup(var.slack, "channel", "")
+    function = {
+      package = "lambda_handler.zip"
+      handler = "lambda_handler.lambda_handler"
+      environment_variables = {
+        SLACK_WEBHOOK_URL = lookup(var.slack, "webhook_url", "")
+        SLACK_CHANNEL     = lookup(var.slack, "channel", "")
+      }
     }
   }
 }
@@ -247,16 +249,14 @@ resource "aws_ssm_association" "patch-baseline" {
 ### compliance/guardrail
 module "guardrail" {
   source  = "Young-ook/passport/aws//modules/aws-config"
-  version = "0.0.7"
-  name    = random_pet.name.id
+  version = "0.0.13"
   tags    = var.tags
 }
 
 ### security/idp
 module "idp" {
   source  = "Young-ook/passport/aws//modules/cognito"
-  version = "0.0.7"
-  name    = random_pet.name.id
+  version = "0.0.13"
   tags    = var.tags
   policy_arns = {
     authenticated   = [aws_iam_policy.put-events.arn]
