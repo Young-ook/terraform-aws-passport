@@ -54,3 +54,10 @@ tfenv use <version>
 # Additional Resources
 - [AWS re:Invent 2022 - Reimagining multi-account deployments for security and speed (NFX305)](https://youtu.be/MKc9r6xOTpk)
 - [RBAC with AWS IAM](https://youngookkim.tistory.com/80)
+- [AWS Terraform Landing Zone (TLZ) Accelerator](https://www.hashicorp.com/resources/aws-terraform-landing-zone-tlz-accelerator)
+- [Azure Cloud Adoption Framework: CCoE (Cloud Center of Excellence)](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/organize/cloud-center-of-excellence)
+- [Automating Service Limit Increases and Enterprise Support with AWS Control Tower](https://aws.amazon.com/ko/blogs/mt/automating-service-limit-increases-enterprise-support-aws-control-tower/)
+- [Zero Trust architectures: An AWS perspective](https://aws.amazon.com/blogs/security/zero-trust-architectures-an-aws-perspective/)
+- [Customize your AWS Control Tower landing zone](https://docs.aws.amazon.com/controltower/latest/userguide/customize-landing-zone.html)
+- [Quota Monitor for AWS](https://aws.amazon.com/solutions/implementations/quota-monitor/)
+- [Managing and monitoring API throttling in your workloads](https://aws.amazon.com/ko/blogs/mt/managing-monitoring-api-throttling-in-workloads/)
