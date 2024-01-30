@@ -89,3 +89,12 @@ terraform destroy --auto-approve
 ```
 terraform destroy -var-file fixture.tc1.tfvars
 ```
+
+# Additional Resources
+## AWS Config
+- [Preventing blacklisted applications with AWS Systems Manager and AWS Config](https://aws.amazon.com/blogs/mt/preventing-blacklisted-applications-with-aws-systems-manager-and-aws-config/)
+- [Operational Best Practices for K-ISMS](https://docs.aws.amazon.com/config/latest/developerguide/operational-best-practices-for-k-isms.html)
+- [Understanding the differences between configuration history and configuration snapshot files in AWS Config](https://aws.amazon.com/blogs/mt/configuration-history-configuration-snapshot-files-aws-config/)
+
+## AWS IAM
+- [Simplify granting access to your AWS resources by using tags on AWS IAM users and roles](https://aws.amazon.com/blogs/security/simplify-granting-access-to-your-aws-resources-by-using-tags-on-aws-iam-users-and-roles/)

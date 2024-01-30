@@ -61,3 +61,8 @@ tfenv use <version>
 - [Customize your AWS Control Tower landing zone](https://docs.aws.amazon.com/controltower/latest/userguide/customize-landing-zone.html)
 - [Quota Monitor for AWS](https://aws.amazon.com/solutions/implementations/quota-monitor/)
 - [Managing and monitoring API throttling in your workloads](https://aws.amazon.com/ko/blogs/mt/managing-monitoring-api-throttling-in-workloads/)
+- [Identity Federation Workshop](https://identity-federation.awssecworkshops.com/)
+- [Netflix ConsoleMe](https://github.com/Netflix/consoleme)
+- [AWS Well-Architected Lab: Cloud Intelligence Dashboards](https://www.wellarchitectedlabs.com/cloud-intelligence-dashboards/)
+- [AWS Organizations, AWS Config, and Terraform](https://aws.amazon.com/blogs/mt/aws-organizations-aws-config-and-terraform/)
+- [Automate VPC tagging with AWS Control Tower lifecycle events](https://aws.amazon.com/blogs/infrastructure-and-automation/automate-vpc-tagging-with-aws-control-tower-lifecycle-events/)
