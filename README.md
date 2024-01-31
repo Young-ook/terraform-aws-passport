@@ -67,3 +67,4 @@ tfenv use <version>
 - [AWS Organizations, AWS Config, and Terraform](https://aws.amazon.com/blogs/mt/aws-organizations-aws-config-and-terraform/)
 - [Automate VPC tagging with AWS Control Tower lifecycle events](https://aws.amazon.com/blogs/infrastructure-and-automation/automate-vpc-tagging-with-aws-control-tower-lifecycle-events/)
 - [Cloud Audit Academy](https://aws.amazon.com/compliance/auditor-learning-path/)
+- [AWS Security Reference Architecture Examples](https://github.com/aws-samples/aws-security-reference-architecture-examples)
