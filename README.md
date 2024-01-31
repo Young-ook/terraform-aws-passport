@@ -66,3 +66,4 @@ tfenv use <version>
 - [AWS Well-Architected Lab: Cloud Intelligence Dashboards](https://www.wellarchitectedlabs.com/cloud-intelligence-dashboards/)
 - [AWS Organizations, AWS Config, and Terraform](https://aws.amazon.com/blogs/mt/aws-organizations-aws-config-and-terraform/)
 - [Automate VPC tagging with AWS Control Tower lifecycle events](https://aws.amazon.com/blogs/infrastructure-and-automation/automate-vpc-tagging-with-aws-control-tower-lifecycle-events/)
+- [Cloud Audit Academy](https://aws.amazon.com/compliance/auditor-learning-path/)
